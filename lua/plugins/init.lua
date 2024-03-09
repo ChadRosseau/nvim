@@ -205,19 +205,25 @@ local default_plugins = {
       require("nvim-tree").setup(opts)
     end,
   },
-
-  {
+{
     "nvim-telescope/telescope.nvim",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     cmd = "Telescope",
     init = function()
-      require("core.utils").load_mappings "telescope"
+      local builtin = require('telescope.builtin')
+      local wk = require('which-key')
+      wk.register({
+        ['ff'] = { builtin.find_files, "Find File" },
+        ['fb'] = { builtin.buffers, "Find Buffer" },
+        ['fg'] = { builtin.live_grep, "Find with Grep" },
+        ['fh'] = { builtin.help_tags, "Find Help" },
+        ['fn'] = { ":Telescope file_browser path=%:p:h select_buffer=true<CR>", "File Browser" },
+      }, { prefix = "<leader>" })
     end,
     opts = function()
       return require "plugins.configs.telescope"
     end,
     config = function(_, opts)
-      dofile(vim.g.base46_cache .. "telescope")
       local telescope = require "telescope"
       telescope.setup(opts)
 
@@ -226,6 +232,13 @@ local default_plugins = {
         telescope.load_extension(ext)
       end
     end,
+  },
+  {
+    "nvim-telescope/telescope-file-browser.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+  },
+  {
+
   },
 
   -- Only load whichkey after all the gui
