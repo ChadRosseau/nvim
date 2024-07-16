@@ -99,7 +99,7 @@ local options = {
     end, {
       "i",
     }),
-    ["<Tab>"] = cmp.mapping.confirm({select = true}),
+    ["<Tab>"] = cmp.mapping.confirm({ select = true }),
   },
   sources = {
     { name = "nvim_lsp" },
