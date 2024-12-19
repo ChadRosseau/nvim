@@ -10,6 +10,23 @@ require("core.utils").load_mappings()
 
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 
+
+-- Manual way to get tailwind autocomplete in angular files
+vim.cmd([[
+  autocmd BufNewFile,BufRead *.component.html set filetype=html
+]])
+
+-- Disable ESLint LSP server and hide virtual text in Neovim
+-- Add this to your init.lua or init.vim file
+local isLspDiagnosticsVisible = true
+vim.keymap.set("n", "<leader>lx", function()
+  isLspDiagnosticsVisible = not isLspDiagnosticsVisible
+  vim.diagnostic.config({
+    virtual_text = isLspDiagnosticsVisible,
+    underline = isLspDiagnosticsVisible
+  })
+end)
+
 -- bootstrap lazy.nvim!
 if not vim.loop.fs_stat(lazypath) then
   require("core.bootstrap").gen_chadrc_template()

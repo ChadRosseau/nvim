@@ -16,6 +16,17 @@ local options = {
     grep_previewer = require 'telescope.previewers'.vim_buffer_vimgrep.new,
     qflist_previewer = require 'telescope.previewers'.vim_buffer_qflist.new,
   },
+  pickers = {
+    find_files = {
+      theme = "dropdown",
+    },
+    live_grep  = {
+      theme = "dropdown",
+    },
+    buffers    = {
+      theme = "dropdown",
+    }
+  },
   extensions = {
     file_browser = {
       theme = "ivy",

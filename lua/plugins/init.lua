@@ -175,12 +175,12 @@ local default_plugins = {
   {
     "numToStr/Comment.nvim",
     keys = {
-      { "gcc", mode = "n",          desc = "Comment toggle current line" },
-      { "gc",  mode = { "n", "o" }, desc = "Comment toggle linewise" },
-      { "gc",  mode = "x",          desc = "Comment toggle linewise (visual)" },
-      { "gbc", mode = "n",          desc = "Comment toggle current block" },
-      { "gb",  mode = { "n", "o" }, desc = "Comment toggle blockwise" },
-      { "gb",  mode = "x",          desc = "Comment toggle blockwise (visual)" },
+      -- { "gcc", mode = "n", desc = "Comment toggle current line" },
+      { "gc",  mode = "o", desc = "Comment toggle linewise" },
+      { "gc",  mode = "x", desc = "Comment toggle linewise (visual)" },
+      { "gbc", mode = "n", desc = "Comment toggle current block" },
+      { "gb",  mode = "o", desc = "Comment toggle blockwise" },
+      { "gb",  mode = "x", desc = "Comment toggle blockwise (visual)" },
     },
     init = function()
       require("core.utils").load_mappings "comment"
@@ -212,13 +212,22 @@ local default_plugins = {
     init = function()
       local builtin = require('telescope.builtin')
       local wk = require('which-key')
-      wk.register({
-        ['ff'] = { builtin.find_files, "Find File" },
-        ['fb'] = { builtin.buffers, "Find Buffer" },
-        ['fg'] = { builtin.live_grep, "Find with Grep" },
-        ['fh'] = { builtin.help_tags, "Find Help" },
-        ['fn'] = { ":Telescope file_browser path=%:p:h select_buffer=true<CR>", "File Browser" },
-      }, { prefix = "<leader>" })
+      wk.add(
+        {
+          { "<leader>ff", builtin.find_files,                                               desc = "Find File" },
+          { "<leader>fb", builtin.buffers,                                                  desc = "Find Buffer" },
+          { "<leader>fg", builtin.live_grep,                                                desc = "Find with Grep" },
+          { "<leader>fh", builtin.help_tags,                                                desc = "Find Help" },
+          { "<leader>fn", ":Telescope file_browser path=%:p:help |select_buffer=true<CR>|", desc = "File Browser" },
+        }
+      -- {
+      --      ['ff'] = { builtin.find_files, "Find File" },
+      --      ['fb'] = { builtin.buffers, "Find Buffer" },
+      --      ['fg'] = { builtin.live_grep, "Find with Grep" },
+      --      ['fh'] = { builtin.help_tags, "Find Help" },
+      --      ['fn'] = { ":Telescope file_browser path=%:p:h select_buffer=true<CR>", "File Browser" },
+      --    }, { prefix = "<leader>" } { "<leader>fb", <function 1>, desc = "Find Buffer" },
+      )
     end,
     opts = function()
       return require "plugins.configs.telescope"
