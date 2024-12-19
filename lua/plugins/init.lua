@@ -217,6 +217,8 @@ local default_plugins = {
           { "<leader>ff", builtin.find_files,                                               desc = "Find File" },
           { "<leader>fb", builtin.buffers,                                                  desc = "Find Buffer" },
           { "<leader>fg", builtin.live_grep,                                                desc = "Find with Grep" },
+          { "<leader>fi", builtin.current_buffer_fuzzy_find,                                desc = "Fuzzy find in current file" },
+          { "<leader>fo", builtin.oldfiles,                                                 desc = "Find Recent" },
           { "<leader>fh", builtin.help_tags,                                                desc = "Find Help" },
           { "<leader>fn", ":Telescope file_browser path=%:p:help |select_buffer=true<CR>|", desc = "File Browser" },
         }
